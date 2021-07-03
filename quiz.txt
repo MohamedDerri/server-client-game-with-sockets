@@ -1,0 +1,7 @@
+Which of the following are features of TCP Socket Stream? / Simplex / Uni-directional / Connection-oriented / Unreliable / bonne reponse : Connection-oriented
+Is closing a socket mandatory, after performing operations? / May be / Can be / No / Yes / bonne reponse : Yes
+Which of the following are blocking event calls? / connect / resend / reject / disconnect / bonne reponse : connect
+To which class does IP Address “192.168.1.25” belongs? / A / B  / C  / D / bonne reponse : C
+Can we skip socket binding? / Can be / May be / No / Yes / bonne reponse : No
+Est-il possible de réaliser un serveur gérant plusieurs clients simultanément en n'utilisant que des fonctions systèmes de la bibliothèque des sockets ? / Oui / Non / peut-etre / je passe / bonne reponse : Non
+Quel nombre minimal de socket est nécessaire pour lier un serveur à toutes les interfaces réseau d'une machine ? / Une / Autant que d'interfaces réseau / Une de plus que d'interfaces réseau / Aucune /bonne reponse : Une
