@@ -91,13 +91,14 @@ void	*client_thread(void *arg)
 	printf("===>size = %lu\n", strlen(mode));
 	printf("===>%s\n", mode);
 	printf("\033[0m%s a choisi de jouer en mode : \033[0;35m %s\n", player.nom, mode);
+	printf("\033[0m");
 	if (strcmp(mode, "unique") == 0)
 	{
 		char rep[2];
-		char bRep[1];
+		char bRep;
 		while (global_q2->next != NULL)
 		{
-			printf("quest = %s\n", global_q2->question);
+			printf("\033[0;36mquest = \033[0m%s\n", global_q2->question);
 			send(socket, global_q2->question, ft_strlen(global_q2->question) + 1, 0);
 			sleep(1);
 			send(socket, global_q2->choixA, ft_strlen(global_q2->choixA) + 1, 0);
@@ -108,25 +109,41 @@ void	*client_thread(void *arg)
 			sleep(1);
 			send(socket, global_q2->choixD, ft_strlen(global_q2->choixD) + 1, 0);
 			sleep(1);
-			recv(socket, rep, 2, 0);
 			printf("==>%s\n", rep);
+			// printf("==>%s et len  = %zu et len2 = %zu \n", global_q2->bonneR, ft_strlen(global_q2->bonneR), ft_strlen(global_q2->choixC));
 			if (ft_strcmp(global_q2->bonneR, global_q2->choixA) == 0)
-				bRep[0] = 'A';
-			if (ft_strcmp(global_q2->bonneR, global_q2->choixB) == 0)
-				bRep[0] = 'B';
-			if (ft_strcmp(global_q2->bonneR, global_q2->choixC) == 0)
-				bRep[0] = 'C';
-			if (ft_strcmp(global_q2->bonneR, global_q2->choixD) == 0)
-				bRep[0] = 'D';
-			if (ft_strcmp(rep, bRep) == 0)
+				bRep = 'A';
+			else if (ft_strcmp(global_q2->bonneR, global_q2->choixB) == 0)
+				bRep = 'B';
+			else if (ft_strcmp(global_q2->bonneR, global_q2->choixC) == 0)
+				bRep = 'C';
+			else if (ft_strcmp(global_q2->bonneR, global_q2->choixD) == 0)
+				bRep = 'D';
+			printf("bReb == %c\n", bRep);
+			sleep(7);
+
+			recv(socket, rep, 2, 0);
+			// printf("cmp = %d", ft_strcmp(rep, &bRep));
+			// printf("mp = %d", strcmp(rep, &bRep));
+
+			if (rep[0] - bRep != 0)
+			{   
+				 printf("rep : %s, et bRep : %c\n", rep, bRep);
+				char msssg[] = "\033[0;33mreponse incorrect!\n";
+				send(socket, msssg, ft_strlen(msssg) + 1, 0);
+
+			}
+			else
 			{
-				char mssg[] = "reponse correct!\n";
+				char mssg[] = "\033[0;32mreponse correct!\n";
 				send(socket, mssg, ft_strlen(mssg) + 1, 0);
 				player.score++;
+
 			}
 			sleep(3);
 			global_q2 = global_q2->next;
 		}
+		send(socket, &player, sizeof(player), 0);
 	}
 
 

@@ -42,7 +42,8 @@ int main()
 		char mssg[30];
 		// char bonneR[30];
 		char rep[2];
-		while (1)
+		int i = 0;
+		while (i < 7)
 		{
 			memset(question, 0, 300);
 			memset(choixA, 0, 40);
@@ -76,10 +77,14 @@ int main()
 
 			send(socketClient, rep, ft_strlen(rep), 0);
 			recv(socketClient, mssg, 31, 0);
-			printf("%s\n", mssg)
+			printf("%s\n", mssg);
+			printf("\033[0m");
 ;			sleep(1);
+			i++;
 
 		}
+		recv(socketClient, &player, sizeof(player), 0);
+		// printf("%s 's total scores is %d\n", player.nom, player.score);
 	}
 	// printf("%s\n", player->nom);
 	// close(socketClient);
