@@ -4,3 +4,4 @@
 ##### launch the server with `./server quiz.txt`
 ##### split the terminal and launch the client with `./client`
 
+###### btw this is a 3 hours work so if you come accross any bug pls report it :)
